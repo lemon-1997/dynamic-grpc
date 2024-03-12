@@ -22,7 +22,7 @@ func (c jsonCodec) Unmarshal(data []byte, pathParams map[string]string, msg *dyn
 		if fd == nil {
 			continue
 		}
-		val := decodeFields(fd, []string{v})
+		val := decodeFields(fd, v)
 		if val == nil {
 			continue
 		}

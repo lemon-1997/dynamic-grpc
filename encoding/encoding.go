@@ -46,67 +46,59 @@ func CodecBySubtype(subtype string) Codec {
 	return codec[subtype]
 }
 
-func decodeFields(fd *desc.FieldDescriptor, val []string) interface{} {
+func decodeFields(fd *desc.FieldDescriptor, val string) interface{} {
 	switch fd.GetType() {
 	case descriptorpb.FieldDescriptorProto_TYPE_ENUM:
-		vd := fd.GetEnumType().FindValueByName(val[0])
+		vd := fd.GetEnumType().FindValueByName(val)
 		if vd != nil {
 			return vd.GetNumber()
 		}
-		return nil
+		return 0
 	case descriptorpb.FieldDescriptorProto_TYPE_BOOL:
-		if val[0] == "true" {
-			return true
-		} else if val[0] == "false" {
-			return false
+		if b, err := strconv.ParseBool(val); err == nil {
+			return b
 		}
-		return nil
+		return false
 	case descriptorpb.FieldDescriptorProto_TYPE_BYTES:
-		return []byte(val[0])
+		return []byte(val)
 	case descriptorpb.FieldDescriptorProto_TYPE_STRING:
 		return val[0]
 	case descriptorpb.FieldDescriptorProto_TYPE_FLOAT:
-		if f, err := strconv.ParseFloat(val[0], 32); err == nil {
+		if f, err := strconv.ParseFloat(val, 32); err == nil {
 			return float32(f)
-		} else {
-			return float32(0)
 		}
+		return float32(0)
 	case descriptorpb.FieldDescriptorProto_TYPE_DOUBLE:
-		if f, err := strconv.ParseFloat(val[0], 64); err == nil {
+		if f, err := strconv.ParseFloat(val, 64); err == nil {
 			return f
-		} else {
-			return float64(0)
 		}
+		return float64(0)
 	case descriptorpb.FieldDescriptorProto_TYPE_INT32,
 		descriptorpb.FieldDescriptorProto_TYPE_SINT32,
 		descriptorpb.FieldDescriptorProto_TYPE_SFIXED32:
-		if i, err := strconv.ParseInt(val[0], 10, 32); err == nil {
+		if i, err := strconv.ParseInt(val, 10, 32); err == nil {
 			return int32(i)
-		} else {
-			return int32(0)
 		}
+		return int32(0)
 	case descriptorpb.FieldDescriptorProto_TYPE_UINT32,
 		descriptorpb.FieldDescriptorProto_TYPE_FIXED32:
-		if i, err := strconv.ParseUint(val[0], 10, 32); err == nil {
+		if i, err := strconv.ParseUint(val, 10, 32); err == nil {
 			return uint32(i)
-		} else {
-			return uint32(0)
 		}
+		return uint32(0)
 	case descriptorpb.FieldDescriptorProto_TYPE_INT64,
 		descriptorpb.FieldDescriptorProto_TYPE_SINT64,
 		descriptorpb.FieldDescriptorProto_TYPE_SFIXED64:
-		if i, err := strconv.ParseInt(val[0], 10, 64); err == nil {
+		if i, err := strconv.ParseInt(val, 10, 64); err == nil {
 			return i
-		} else {
-			return int64(0)
 		}
+		return int64(0)
 	case descriptorpb.FieldDescriptorProto_TYPE_UINT64,
 		descriptorpb.FieldDescriptorProto_TYPE_FIXED64:
-		if i, err := strconv.ParseUint(val[0], 10, 64); err == nil {
+		if i, err := strconv.ParseUint(val, 10, 64); err == nil {
 			return i
-		} else {
-			return uint64(0)
 		}
+		return uint64(0)
 	default:
 		return nil
 	}

@@ -32,16 +32,33 @@ func (c formCodec) Unmarshal(data []byte, pathParams map[string]string, msg *dyn
 		}
 		fd := msg.GetMessageDescriptor().FindFieldByName(k)
 		if fd == nil {
-			if c.unmarshalOpt.AllowUnknownFields {
-				continue
+			fd = msg.GetMessageDescriptor().FindFieldByJSONName(k)
+			if fd == nil {
+				if c.unmarshalOpt.AllowUnknownFields {
+					continue
+				}
+				return fmt.Errorf("message type %s has no known field named %s", msg.GetMessageDescriptor().GetFullyQualifiedName(), k)
 			}
-			return fmt.Errorf("message type %s has no known field named %s", msg.GetMessageDescriptor().GetFullyQualifiedName(), k)
 		}
-		val := decodeFields(fd, v)
+		if fd.UnwrapField().IsList() {
+			var list []interface{}
+			for _, item := range v {
+				val := decodeFields(fd, item)
+				if val == nil {
+					continue
+				}
+				list = append(list, val)
+			}
+			if err = msg.TrySetFieldByName(fd.GetName(), list); err != nil {
+				c.log.Warn("unmarshal set field fail", "field", k, "err", err)
+			}
+			continue
+		}
+		val := decodeFields(fd, v[0])
 		if val == nil {
 			continue
 		}
-		if err = msg.TrySetFieldByName(k, val); err != nil {
+		if err = msg.TrySetFieldByName(fd.GetName(), val); err != nil {
 			c.log.Warn("unmarshal set field fail", "field", k, "err", err)
 		}
 	}
