@@ -11,7 +11,7 @@ Proxy HTTP requests to call gRPC services, use protoreflect to dynamically updat
 
 ## Examples
 
-https://github.com/lemon-1997/sqlboy/tree/main/examples
+[https://github.com/lemon-1997/sqlboy/tree/main/examples](https://github.com/lemon-1997/dynamic-grpc/tree/main/examples)
 
 ## Blog post
 If you want to learn more details about my motivation to write this and follow my steps in doing so, check out [my blog post](https://lemon-1997.pages.dev/post/project-grpc#more/) on the topic.
