@@ -63,7 +63,7 @@ func decodeFields(fd *desc.FieldDescriptor, val string) interface{} {
 	case descriptorpb.FieldDescriptorProto_TYPE_BYTES:
 		return []byte(val)
 	case descriptorpb.FieldDescriptorProto_TYPE_STRING:
-		return val[0]
+		return val
 	case descriptorpb.FieldDescriptorProto_TYPE_FLOAT:
 		if f, err := strconv.ParseFloat(val, 32); err == nil {
 			return float32(f)

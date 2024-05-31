@@ -20,5 +20,3 @@ If you want to learn more details about my motivation to write this and follow m
 This repository is inspired by the following projects
 - https://github.com/grpc-ecosystem/grpc-gateway
 - https://github.com/jhump/protoreflect
-
-`httprule` of this project comes from [`grpc-gateway`](https://github.com/grpc-ecosystem/grpc-gateway/tree/main/internal/httprule)  
