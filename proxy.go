@@ -3,6 +3,13 @@ package dynamic_proxy
 import (
 	"context"
 	"fmt"
+	"log/slog"
+	"net/http"
+	"os"
+	"strings"
+	"sync"
+	"time"
+
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/jhump/protoreflect/dynamic"
@@ -10,12 +17,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
-	"log/slog"
-	"net/http"
-	"os"
-	"strings"
-	"sync"
-	"time"
 )
 
 type Proxy struct {

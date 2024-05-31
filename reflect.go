@@ -3,6 +3,9 @@ package dynamic_proxy
 import (
 	"context"
 	"fmt"
+	"log/slog"
+	"net/http"
+
 	"github.com/jhump/protoreflect/desc"
 	"github.com/jhump/protoreflect/dynamic"
 	"github.com/jhump/protoreflect/dynamic/grpcdynamic"
@@ -12,8 +15,6 @@ import (
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/proto"
-	"log/slog"
-	"net/http"
 )
 
 type ReflectClient struct {

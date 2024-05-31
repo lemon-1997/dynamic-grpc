@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
+	"log"
+	"net"
+	"net/http"
+
 	"github.com/lemon-1997/dynamic-proxy"
 	pb "github.com/lemon-1997/dynamic-proxy/examples/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"log"
-	"net"
-	"net/http"
 )
 
 type server struct {

@@ -3,13 +3,14 @@ package dynamic_proxy
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+	"strings"
+
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/jhump/protoreflect/dynamic"
 	"github.com/lemon-1997/dynamic-proxy/encoding"
 	"google.golang.org/grpc/status"
-	"io"
-	"net/http"
-	"strings"
 )
 
 type Response struct {

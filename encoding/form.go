@@ -2,10 +2,11 @@ package encoding
 
 import (
 	"fmt"
-	"github.com/golang/protobuf/jsonpb"
-	"github.com/jhump/protoreflect/dynamic"
 	"log/slog"
 	"net/url"
+
+	"github.com/golang/protobuf/jsonpb"
+	"github.com/jhump/protoreflect/dynamic"
 )
 
 type formCodec struct {

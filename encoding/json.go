@@ -1,9 +1,10 @@
 package encoding
 
 import (
+	"log/slog"
+
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/jhump/protoreflect/dynamic"
-	"log/slog"
 )
 
 type jsonCodec struct {

@@ -1,10 +1,11 @@
 package dynamic_proxy
 
 import (
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/lemon-1997/dynamic-proxy/httprule"
 	"regexp"
 	"strings"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/lemon-1997/dynamic-proxy/httprule"
 )
 
 var encodedPathSplitter = regexp.MustCompile("(/|%2F)")

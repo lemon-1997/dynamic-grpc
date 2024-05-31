@@ -1,12 +1,13 @@
 package encoding
 
 import (
+	"log/slog"
+	"strconv"
+
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/jhump/protoreflect/desc"
 	"github.com/jhump/protoreflect/dynamic"
 	"google.golang.org/protobuf/types/descriptorpb"
-	"log/slog"
-	"strconv"
 )
 
 var (
